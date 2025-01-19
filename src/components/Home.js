@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { DarkModeContext } from "../context/DarkModeContext";
 import { Link } from "react-router-dom";
-import { ThreeDots } from "react-loader-spinner";
 import "./Home.css";
 
 const Home = () => {
@@ -13,6 +12,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 5;
 
+  console.log(users);
   
   useEffect(() => {
     fetchUsers();
@@ -31,16 +31,10 @@ const Home = () => {
 
   const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
 
-  if (loading) return <div className={`loading ${darkMode ? 'dark': 'light'}`}>
-    <ThreeDots
-        height="50"
-        width="50"
-        color="blue"
-        ariaLabel="loading"
-        wrapperStyle={{}}
-        wrapperClass=""
-        visible={true}
-      />
+ 
+
+  if (loading) return <div className={`loader-container ${darkMode ? 'dark' : 'light'}`}>
+    <div className='spinner'></div>
   </div>;
   
   if (error) return <div className={`error ${darkMode ? 'dark': 'light'}`}>

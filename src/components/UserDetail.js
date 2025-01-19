@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { DarkModeContext } from "../context/DarkModeContext";
 import { useParams, useNavigate } from "react-router-dom";
-import { ThreeDots } from "react-loader-spinner";
 import "./UserDetail.css";
 
 const UserDetail = () => {
@@ -17,17 +16,10 @@ const UserDetail = () => {
     fetchUsers();
   }, []);
 
-  if (loading) return <div className={`loading ${darkMode ? 'dark': 'light'}`}>
-      <ThreeDots
-          height="50"
-          width="50"
-          color="blue"
-          ariaLabel="loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />
-    </div>;
+
+    if (loading) return <div className={`loader-container ${darkMode ? 'dark' : 'light'}`}>
+    <div className='spinner'></div>
+  </div>;
 
   if (!user) return <div className={`error ${darkMode ? 'dark' : 'light'}`}>
     <img src='https://static.thenounproject.com/png/2247019-200.png' alt='error-img' />
